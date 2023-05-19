@@ -1,2 +1,2 @@
 # PGIC_inpainting
-Prompt-Guided In-Context Inpainting (PGIC)
+A Unified Prompt-Guided In-Context Inpainting Framework for Reference-based Image Manipulations (PGIC)
