@@ -1,6 +1,4 @@
-# Anonymous Codes of PGIC
-A Unified Prompt-Guided In-Context Inpainting Framework for Reference-based Image Manipulations (PGIC)
-
-[arxiv paper](https://arxiv.org/abs/2305.11577)
+# Anonymous Codes of ARCI
+Harnessing Text-to-Image Attention Prior for Reference-based Multi-view Image Synthesis
 
 Codes and datasets will be released soon.
