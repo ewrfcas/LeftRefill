@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Harnessing Text-to-Image Attention Prior for Reference-based Multi-view Image Synthesis.">
+  <meta name="keywords" content="Image Inpainting">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Harnessing Text-to-Image Attention Prior for Reference-based Multi-view Image Synthesis</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+<!--  <link rel="icon" href="./static/images/favicon.svg">-->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+<!--  <div class="navbar-menu">-->
+<!--    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">-->
+<!--      <a class="navbar-item" href="">-->
+<!--      <span class="icon">-->
+<!--          <i class="fas fa-home"></i>-->
+<!--      </span>-->
+<!--      </a>-->
+
+<!--      <div class="navbar-item has-dropdown is-hoverable">-->
+<!--        <a class="navbar-link">-->
+<!--          More Research-->
+<!--        </a>-->
+<!--        <div class="navbar-dropdown">-->
+<!--          <a class="navbar-item" href="https://github.com/ewrfcas/MST_inpainting">-->
+<!--            MST_inpainting-->
+<!--          </a>-->
+<!--          <a class="navbar-item" href="https://github.com/DQiaole/ZITS_inpainting">-->
+<!--            ZITS_inpainting-->
+<!--          </a>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Harnessing Text-to-Image Attention Prior for Reference-based Multi-view Image Synthesis</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://ewrfcas.github.io/">Chenjie Cao</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://github.com/Colektan">Yunuo Cai</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://dqiaole.github.io/">Qiaole Dong</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://yikai-wang.github.io/">Yikai Wang</a>,
+            </span>
+            <span class="author-block">
+              <a href="http://yanweifu.github.io/">Yanwei Fu</a>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">School of Data Science, Fudan University</span>
+          </div>
+
+<!--          <div class="is-size-6 publication-authors">-->
+<!--            <span class="author-block">* equal contributions</span>-->
+<!--          </div>-->
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2305.11577"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://github.com/ewrfcas/ARCI"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code and Model</span>
+                  </a>
+              </span>
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <center>
+      <img src="./static/images/teaser.jpg" width="1000px"/>
+      </center>
+<!--      <video id="teaser" autoplay muted loop height="100%">-->
+<!--        <source src="https://homes.cs.washington.edu/~kpar/nerfies/videos/teaser.mp4"-->
+<!--                type="video/mp4">-->
+<!--      </video>-->
+<!--      <h2 class="subtitle has-text-centered">-->
+<!--        Our proposed CasMTR can achieve precise matching for both source and target views.-->
+<!--      </h2>-->
+
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            This paper explores the domain of multi-view image synthesis,
+            aiming to create specific image elements or entire
+            scenes while ensuring visual consistency with reference images.
+            We categorize this task into two approaches: local
+            synthesis, guided by structural cues from reference images
+            (Reference-based inpainting, Ref-inpainting), and global synthesis,
+            which generates entirely new images based solely on
+            reference examples (Novel View Synthesis, NVS). In recent
+            years, Text-to-Image (T2I) generative models have gained
+            attention in various domains. However, adapting them for
+            multi-view synthesis is challenging due to the intricate correlations
+            between reference and target images. To address
+            these challenges efficiently, we introduce Attention Reactivated
+            Contextual Inpainting (ARCI), a unified approach that
+            reformulates both local and global reference-based multiview
+            synthesis as contextual inpainting, which is enhanced
+            with pre-existing attention mechanisms in T2I models. Formally,
+            self-attention is leveraged to learn feature correlations
+            across different reference views, while cross-attention
+            is utilized to control the generation through prompt tuning.
+            Our contributions of ARCI, built upon the StableDiffusion
+            fine-tuned for text-guided inpainting, include skillfully handling
+            difficult multi-view synthesis tasks with off-the-shelf
+            T2I models, introducing task and view-specific prompt tuning
+            for generative control, achieving end-to-end Ref-inpainting,
+            and implementing block causal masking for autoregressive
+            NVS. We also show the versatility of ARCI by extending it
+            to multi-view generation for superior consistency with the
+            same architecture, which has also been validated through
+            extensive experiments.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- Animation. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Overview</h2>
+
+        <!-- Interpolating. -->
+<!--        <div class="content has-text-justified">-->
+<!--          <p>-->
+<!--            We can also animate the scene by interpolating the deformation latent codes of two input-->
+<!--            frames. Use the slider here to linearly interpolate between the left frame and the right-->
+<!--            frame.-->
+<!--          </p>-->
+<!--        </div>-->
+          <br/>
+          <div class="columns is-vcentered interpolation-panel">
+            <img src="./static/images/overview.jpg"
+                 class="interpolation-image"
+                 alt="Interpolate start reference image."/>
+          </div>
+        </div>
+        <br/>
+      </div>
+    </div>
+    <!--/ Animation. -->
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- Animation. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">The formulation of ARCI</h2>
+
+        <!-- Interpolating. -->
+<!--        <div class="content has-text-justified">-->
+<!--          <p>-->
+<!--            We can also animate the scene by interpolating the deformation latent codes of two input-->
+<!--            frames. Use the slider here to linearly interpolate between the left frame and the right-->
+<!--            frame.-->
+<!--          </p>-->
+<!--        </div>-->
+          <br/>
+          <div class="columns is-vcentered interpolation-panel">
+            <img src="./static/images/model.jpg"
+                 class="interpolation-image"
+                 alt="Interpolate start reference image."/>
+          </div>
+        </div>
+        <br/>
+      </div>
+    </div>
+    <!--/ Animation. -->
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Animation. -->
+        <!-- Paper video. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Video of reference-based inpainting</h2>
+        <div class="publication-video">
+          <iframe src="static/images/ARCI_ref_inpainting.mp4"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/ Animation. -->
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Results of reference-based inpainting</h2>
+        <div class="columns is-vcentered interpolation-panel">
+          <img src="./static/images/result_ref_inpainting.jpg"
+               class="interpolation-image"
+               alt="Interpolate start reference image."/>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Results of novel view synthesis</h2>
+        <h2 class="title is-5">Consistent autoregressive synthesis</h2>
+        <div class="columns is-vcentered interpolation-panel">
+          <img src="./static/images/nvs_ar.jpg"
+               class="interpolation-image"
+               alt="Interpolate start reference image."/>
+        </div>
+
+        <h2 class="title is-5">Multi-view reference-based synthesis</h2>
+        <div class="columns is-vcentered interpolation-panel">
+          <img src="./static/images/nvs_mv.jpg"
+               class="interpolation-image"
+               alt="Interpolate start reference image."/>
+        </div>
+
+        <h2 class="title is-5">Real-world generalization</h2>
+        <div class="columns is-vcentered interpolation-panel">
+          <img src="./static/images/nvs_real.jpg"
+               class="interpolation-image"
+               alt="Interpolate start reference image."/>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>
+      @article{cao2023harnessing,
+      title={Harnessing Text-to-Image Attention Prior for Reference-based Multi-view Image Synthesis},
+      author={Cao, Chenjie and Cai, Yunuo and Dong, Qiaole and Wang, Yikai and Fu, Yanwei},
+      journal={arXiv preprint arXiv:2305.11577},
+      year={2023}}
+    </code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="https://arxiv.org/abs/2305.11577">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/ewrfcas/ARCI" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
+            we just ask that you link back to this page in the footer.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
