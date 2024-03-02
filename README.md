@@ -87,7 +87,7 @@ If you found our project helpful, please consider citing:
 @inproceedings{cao2024leftrefill,
       title={LeftRefill: Filling Right Canvas based on Left Reference through Generalized Text-to-Image Diffusion Model}, 
       author={Chenjie Cao and Yunuo Cai and Qiaole Dong and Yikai Wang and Yanwei Fu},
-      year={2024},
       booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+      year={2024},
 }
 ```
