@@ -1,8 +1,8 @@
 # LeftRefill
 LeftRefill: Filling Right Canvas based on Left Reference through Generalized Text-to-Image Diffusion Model (CVPR2024)
 
-
-[Project Page](https://ewrfcas.github.io/LeftRefill/)
+[Project Page](https://ewrfcas.github.io/LeftRefill/),
+[Paper](https://arxiv.org/abs/2305.11577)
 
 
 ## Abstract
