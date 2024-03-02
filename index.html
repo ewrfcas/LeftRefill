@@ -121,7 +121,7 @@
                 </a>
               </span>
               <span class="link-block">
-                <a href="https://github.com/ewrfcas/ARCI"
+                <a href="https://github.com/ewrfcas/LeftRefill"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
@@ -230,7 +230,7 @@ As an exemplar, we leverage LeftRefill to address two different challenges: refe
     <!-- Animation. -->
     <div class="columns is-centered">
       <div class="column is-full-width">
-        <h2 class="title is-3">The formulation of ARCI</h2>
+        <h2 class="title is-3">The formulation of LeftRefill with multi-view setting</h2>
 
         <!-- Interpolating. -->
 <!--        <div class="content has-text-justified">-->
@@ -246,6 +246,9 @@ As an exemplar, we leverage LeftRefill to address two different challenges: refe
                  class="interpolation-image"
                  alt="Interpolate start reference image."/>
           </div>
+          <p>
+            We utilize the block causal masking for autoregressive novel view synthesis training.
+          </p>
         </div>
         <br/>
       </div>
@@ -262,7 +265,7 @@ As an exemplar, we leverage LeftRefill to address two different challenges: refe
       <div class="column is-full-width">
         <h2 class="title is-3">Video of reference-based inpainting</h2>
         <div class="publication-video">
-          <iframe src="static/images/ARCI_ref_inpainting.mp4"
+          <iframe src="static/images/leftrefill_ref_inpainting.mp4"
                   frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </div>
       </div>
@@ -278,6 +281,11 @@ As an exemplar, we leverage LeftRefill to address two different challenges: refe
         <h2 class="title is-3">Results of reference-based inpainting</h2>
         <div class="columns is-vcentered interpolation-panel">
           <img src="./static/images/result_ref_inpainting.jpg"
+               class="interpolation-image"
+               alt="Interpolate start reference image."/>
+        </div>
+        <div class="columns is-vcentered interpolation-panel">
+          <img src="./static/images/mv_inpainting.jpg"
                class="interpolation-image"
                alt="Interpolate start reference image."/>
         </div>
@@ -322,11 +330,12 @@ As an exemplar, we leverage LeftRefill to address two different challenges: refe
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
     <pre><code>
-      @article{cao2023harnessing,
-      title={Harnessing Text-to-Image Attention Prior for Reference-based Multi-view Image Synthesis},
-      author={Cao, Chenjie and Cai, Yunuo and Dong, Qiaole and Wang, Yikai and Fu, Yanwei},
-      journal={arXiv preprint arXiv:2305.11577},
-      year={2023}}
+      @inproceedings{cao2024leftrefill,
+        title={LeftRefill: Filling Right Canvas based on Left Reference through Generalized Text-to-Image Diffusion Model},
+        author={Chenjie Cao and Yunuo Cai and Qiaole Dong and Yikai Wang and Yanwei Fu},
+        booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+        year={2024}
+      }
     </code></pre>
   </div>
 </section>
@@ -339,7 +348,7 @@ As an exemplar, we leverage LeftRefill to address two different challenges: refe
          href="https://arxiv.org/abs/2305.11577">
         <i class="fas fa-file-pdf"></i>
       </a>
-      <a class="icon-link" href="https://github.com/ewrfcas/ARCI" class="external-link" disabled>
+      <a class="icon-link" href="https://github.com/ewrfcas/LeftRefill" class="external-link" disabled>
         <i class="fab fa-github"></i>
       </a>
     </div>
