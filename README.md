@@ -19,6 +19,9 @@ These enable LeftRefill to perform consistent generation as a generalized model 
 Thus, LeftRefill can be seen as a simple yet unified framework to address reference-guided synthesis. 
 As an exemplar, we leverage LeftRefill to address two different challenges: reference-guided inpainting and novel view synthesis, based on the pre-trained StableDiffusion.
 
+![demo](asserts/ref_inpainting_demo.gif)
+
+
 ## TODOList
 
 - [x] Releasing training, inference codes of Ref-inpainting and NVS (1-reference).
