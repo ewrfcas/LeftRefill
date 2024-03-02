@@ -1,0 +1,117 @@
+model:
+  target: inpainting_ldm.NVS_ldm.NVSLDM
+  params:
+    linear_start: 0.00085
+    linear_end: 0.0120
+    num_timesteps_cond: 1
+    log_every_t: 200
+    timesteps: 1000
+    first_stage_key: "image"
+    cond_stage_key: "txt"
+    image_size: 64
+    channels: 4
+    cond_stage_trainable: true
+    conditioning_key: hybrid-refine
+    monitor: val/loss_simple_ema
+    scale_factor: 0.18215
+    use_ema: False
+    finetune_keys: null
+
+    unet_config:
+      target: ldm.modules.diffusionmodules.openaimodel.UNetModel
+      params:
+        use_checkpoint: True
+        image_size: 32 # unused
+        in_channels: 9
+        out_channels: 4
+        model_channels: 320
+        attention_resolutions: [ 4, 2, 1 ]
+        num_res_blocks: 2
+        channel_mult: [ 1, 2, 4, 4 ]
+        num_head_channels: 64 # need to fix for flash-attn
+        use_spatial_transformer: True
+        use_linear_in_transformer: True
+        transformer_depth: 1
+        context_dim: 1024
+        legacy: False
+        use_sep: False
+
+    first_stage_config:
+      target: ldm.models.autoencoder.AutoencoderKL
+      params:
+        embed_dim: 4
+        monitor: val/rec_loss
+        ddconfig:
+          #          attn_type: "vanilla-xformers"
+          double_z: true
+          z_channels: 4
+          resolution: 256
+          in_channels: 3
+          out_ch: 3
+          ch: 128
+          ch_mult:
+            - 1
+            - 2
+            - 4
+            - 4
+          num_res_blocks: 2
+          attn_resolutions: []
+          dropout: 0.0
+        lossconfig:
+          target: torch.nn.Identity
+
+    cond_stage_config:
+      target: ldm.modules.encoders.NVS_modules.NVSCLIPEmbedder
+      params:
+        freeze: False
+        layer: "penultimate"
+        tokenwise_init: False
+        deep_prompt: False
+        view_prompt: False
+        cross_attn_layers: 16
+        pos_strengthen: False
+        cfg_rate: 0.15
+        special_tokens: [ "repeat_73_<special-token>"]
+        init_text: [ "Left is the reference image, while the right one is the target image with different viewpoint. The relative pose:"]
+
+
+    lora:
+      # default:{"CrossAttention", "Attention", "GEGLU"}
+      # simple: {"CrossAttention", "Attention"}
+      # cross_only: {"CrossAttention"}
+      # extended:{"ResnetBlock2D", "CrossAttention", "Attention", "GEGLU"}
+      do_lora: False
+      lora_type: 'default'
+      lora_rank: 16
+      lora_scale: 1.0
+
+
+    data_config:
+      obj_dataset: True
+      mask_file_path: "./data/obj_test_masks"
+      warping_based: False
+      obj_mask: False
+      obj_mask_path: ""
+      img_size: 256
+      cfg: 2.5 # used for testing
+      sp_token: "<special-token>"
+      repeat_sp_token: 73
+      nview: 12
+      dilate_size: [ 10, 25 ]
+      pts_size: [ 20, 45 ]
+      mask_enlarge: [ 0.05, 0.2 ]
+      width_range: [ 80, 140 ]
+      complete_mask_rate: 0.0
+      warmup_mask_steps: 0
+#      view_token_len: 2 # for each view, use X tokens
+      token_map:
+        task_token: "<viewpoints>"
+        real_token: "<same-scene>"
+        left_token: "<left>"
+        right_token: "<right>"
+
+    save_prompt_only: False
+
+    refinement_config:
+      use_input_refinement: False
+      only_masked_refine: False

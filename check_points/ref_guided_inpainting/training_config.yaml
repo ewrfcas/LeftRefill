@@ -1,0 +1,33 @@
+model_config: './configs/ref_inpainting.yaml'
+resume_path: './pretrained_models/512-inpainting-ema.ckpt'
+
+image_path: 'data/megadepth_0.4_0.7/image_dict.pkl'
+train_pair: 'data/megadepth_0.4_0.7/new_train_pairs.pkl'
+val_image_path: 'data/megadepth_0.4_0.7/match_test_image_pairs'
+
+train_mask_path: [ './data/irregular_mask/irregular_lama_mask_list.txt',
+                   './data/coco_mask/coco_mask_list.txt' ]
+val_mask_path: './data/test_mask_100'
+
+annotation: multiview
+return_attn: false
+image_text_pair: false
+
+cross_view_inpainting: true
+
+n_sample_per_scene: 150
+
+batch_size: 8
+accumulate_grad_batches: 2
+logger_freq: 200
+check_val_every_n_epoch: 1
+# val_check_interval: 500
+# max_steps: 12000
+max_epochs: 10
+save_top_k: 2
+
+optim_cfg:
+  learning_rate: 3.0e-5
+  weight_decay: 0.01
+  lr_scheduler: none
+  eta_min: 0.001

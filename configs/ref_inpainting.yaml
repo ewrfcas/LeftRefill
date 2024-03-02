@@ -1,0 +1,96 @@
+model:
+  target: inpainting_ldm.ref_inpainting_ldm.RefInpaintLDM
+  params:
+    linear_start: 0.00085
+    linear_end: 0.0120
+    num_timesteps_cond: 1
+    log_every_t: 200
+    timesteps: 1000
+    first_stage_key: "image"
+    cond_stage_key: "txt"
+    image_size: 64
+    channels: 4
+    cond_stage_trainable: true
+    conditioning_key: hybrid
+    monitor: val/loss_simple_ema
+    scale_factor: 0.18215
+    use_ema: False
+    finetune_keys: null
+
+    unet_config:
+      target: ldm.modules.diffusionmodules.openaimodel.UNetModel
+      params:
+        use_checkpoint: True
+        image_size: 32 # unused
+        in_channels: 9
+        out_channels: 4
+        model_channels: 320
+        attention_resolutions: [ 4, 2, 1 ]
+        num_res_blocks: 2
+        channel_mult: [ 1, 2, 4, 4 ]
+        num_head_channels: 64 # need to fix for flash-attn
+        use_spatial_transformer: True
+        use_linear_in_transformer: True
+        transformer_depth: 1
+        context_dim: 1024
+        legacy: False
+
+    first_stage_config:
+      target: ldm.models.autoencoder.AutoencoderKL
+      params:
+        embed_dim: 4
+        monitor: val/rec_loss
+        ddconfig:
+          #          attn_type: "vanilla-xformers"
+          double_z: true
+          z_channels: 4
+          resolution: 256
+          in_channels: 3
+          out_ch: 3
+          ch: 128
+          ch_mult:
+            - 1
+            - 2
+            - 4
+            - 4
+          num_res_blocks: 2
+          attn_resolutions: []
+          dropout: 0.0
+        lossconfig:
+          target: torch.nn.Identity
+
+    cond_stage_config:
+      target: ldm.modules.encoders.Refill_modules.PromptCLIPEmbedder
+      params:
+        freeze: False
+        layer: "penultimate"
+        tokenwise_init: False
+        deep_prompt: False
+        cross_attn_layers: 16
+        special_tokens: [ "repeat_50_<special-token>"]
+        #         init_text: ["<random>"]
+        init_text: [ "The whole image is splited into two parts with the same size, they share the same scene/landmark captured with different viewpoints and times"]
+
+    data_config:
+      img_size: 512
+      cfg: 2.5 # used for testing
+      only_mask_image: False
+      no_padding: True
+      one_image_overfitting: False
+      view_mask_rate: 0.0
+      test_limit: 150
+      sp_token: "<special-token>"
+      repeat_sp_token: 50
+      match_mask: True
+      match_mask_rate: 0.25
+      flip: False
+      constant_place: True # always left:reference, right:target
+      match_path: "./data/matching_results"
+      token_map:
+        task_token: "<viewpoints>"
+        real_token: "<same-scene>"
+        left_token: "<left>"
+        right_token: "<right>"
+
+    save_prompt_only: True
+

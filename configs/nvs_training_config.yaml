@@ -1,0 +1,30 @@
+model_config: './configs/novel_view_synthesis.yaml'
+resume_path: './pretrained_models/512-inpainting-ema.ckpt'
+
+datapath: './data/objaverse/views_release'
+train_list: 'dataloaders/lists/obj_train.txt'
+val_list: 'dataloaders/lists/obj_test.txt'
+
+return_attn: false
+image_text_pair: false
+cross_view_inpainting: false
+
+batch_size: 16
+accumulate_grad_batches: null
+logger_freq: 200
+#check_val_every_n_epoch: 1
+val_check_interval: 0.1
+# max_steps: 12000
+max_epochs: 10
+save_top_k: 1
+
+optim_cfg:
+  learning_rate: 1.0e-4
+  weight_decay: 0.01
+  lr_scheduler: none
+  eta_min: 0.001
+  lr_sd: 1.0e-5
+  all_trainable: False
+
+  lr_lora: 1.0e-4
+  wd_lora: 0.01
