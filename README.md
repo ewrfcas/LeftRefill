@@ -39,7 +39,9 @@ and place it at ```./pretrained_models/512-inpainting-ema.ckpt```
 
 ## Start with Gradio
 
-```
+You can simply use gradio to test reference-inpainting with custom masks.
+
+```bash
 python ref_inpainting_gradio.py
 ```
 
@@ -47,7 +49,7 @@ python ref_inpainting_gradio.py
 
 ### Reference-guided inpainting (1-reference)
 
-```
+```bash
 CUDA_VISIBLE_DEVICES=0,1 python train_inpainting.py \
   --config_file configs/training_config.yaml \
   --exp_name RefInpainting_V0 \
@@ -57,7 +59,7 @@ CUDA_VISIBLE_DEVICES=0,1 python train_inpainting.py \
 
 ### Novel view synthesis (1-reference)
 
-```
+```bash
 CUDA_VISIBLE_DEVICES=0,1 python train_inpainting.py --config_file configs/nvs_training_config.yaml \
   --exp_name NVS_OBJ_V0 \
   --ngpu 2 \
@@ -68,7 +70,7 @@ CUDA_VISIBLE_DEVICES=0,1 python train_inpainting.py --config_file configs/nvs_tr
 
 ### Reference-guided inpainting
 
-```
+```bash
 CUDA_VISIBLE_DEVICES=0 python test_inpainting.py --model_path check_points/ref_guided_inpainting \
                                                  --batch_size 1 \
                                                  --test_path ./data/megadepth_0.4_0.7/match_test_image_pairs \ 
