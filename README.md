@@ -26,7 +26,7 @@ As an exemplar, we leverage LeftRefill to address two different challenges: refe
 
 - [x] Releasing training, inference codes of Ref-inpainting and NVS (1-reference).
 - [x] Releasing pre-trained Ref-inpainting weights.
-- [ ] Releasing codes of data processing (Megadepth, Objaverse).
+- [x] Releasing codes of data processing.
 - [ ] Releasing codes of multi-view LeftRefill.
 
 ## Models
@@ -46,6 +46,17 @@ python ref_inpainting_gradio.py
 ```
 
 ## Training
+
+### Preprocessing from MegaDepth
+
+Please preset data root path in ```megadepth_overlap.py```, you could download megadepth data from [link](https://www.cs.cornell.edu/projects/megadepth/dataset/Megadepth_v1/MegaDepth_v1.tar.gz).
+Data index (scene_info_0.1_0.7, scene_info_val_1500) could be downloaded from LoFTR ([train link](https://drive.google.com/file/d/1YMAAqCQLmwMLqAkuRIJLDZ4dlsQiOiNA/view?usp=drive_link), [test link](https://drive.google.com/file/d/12yKniNWebDHRTCwhBNJmxYMPgqYX3Nhv/view?usp=drive_link)).
+```bash
+python megadepth_overlap.py
+```
+### Matching mask
+
+You could directly training LeftRefill without matching mask for a fast try, which would achieve slightly worse results. If you need matching results, please refer to some matching works for details ([CasMTR](https://github.com/ewrfcas/CasMTR.git), [RoMa](https://github.com/Parskatt/RoMa.git)).
 
 ### Reference-guided inpainting (1-reference)
 
