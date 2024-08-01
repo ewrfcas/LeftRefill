@@ -51,9 +51,18 @@ python ref_inpainting_gradio.py
 
 Please preset data root path in ```megadepth_overlap.py```, you could download megadepth data from [link](https://www.cs.cornell.edu/projects/megadepth/dataset/Megadepth_v1/MegaDepth_v1.tar.gz).
 Data index (scene_info_0.1_0.7, scene_info_val_1500) could be downloaded from LoFTR ([train link](https://drive.google.com/file/d/1YMAAqCQLmwMLqAkuRIJLDZ4dlsQiOiNA/view?usp=drive_link), [test link](https://drive.google.com/file/d/12yKniNWebDHRTCwhBNJmxYMPgqYX3Nhv/view?usp=drive_link)).
+
 ```bash
 python megadepth_overlap.py
 ```
+### Extending Dataset for Multi-View training and testing
+
+Please refer to ```extend_data_for_multiview.py```, which provide an example of extending MegaDepth data for multi-view training and testing.
+
+```bash
+python extend_data_for_multiview.py
+```
+
 ### Matching mask
 
 You could directly training LeftRefill without matching mask for a fast try, which would achieve slightly worse results. If you need matching results, please refer to some matching works for details ([CasMTR](https://github.com/ewrfcas/CasMTR.git), [RoMa](https://github.com/Parskatt/RoMa.git)).
@@ -62,8 +71,18 @@ You could directly training LeftRefill without matching mask for a fast try, whi
 
 ```bash
 CUDA_VISIBLE_DEVICES=0,1 python train_inpainting.py \
-  --config_file configs/training_config.yaml \
+  --config_file configs/ref_inpainting_training_config.yaml \
   --exp_name RefInpainting_V0 \
+  --ngpu 2 \
+  --fp16
+```
+
+### Reference-guided inpainting (multi-reference)
+
+```bash
+CUDA_VISIBLE_DEVICES=0,1 python train_inpainting.py \
+  --config_file configs/multiview_ref_inpainting_training_config.yaml \
+  --exp_name RefInpainting_4View_V0 \
   --ngpu 2 \
   --fp16
 ```
@@ -80,6 +99,21 @@ CUDA_VISIBLE_DEVICES=0,1 python train_inpainting.py --config_file configs/nvs_tr
 ## Testing
 
 ### Reference-guided inpainting
+
+If you want to test multi-view version of reference-guided inpainting, please execute ```test_multiview_inpainting.py``` instead of ```test_inpainting.py```.
+
+```bash
+CUDA_VISIBLE_DEVICES=0 python test_inpainting.py --model_path check_points/ref_guided_inpainting \
+                                                 --batch_size 1 \
+                                                 --test_path ./data/megadepth_0.4_0.7/match_test_image_pairs \ 
+                                                 --cfg 2.5 \
+                                                 --test_size 512 \
+                                                 --metric_size 512 \
+                                                 --eta 1.0 \
+                                                 --output_path test_outputs_compare
+```
+
+### Multi-View Reference-guided inpainting
 
 ```bash
 CUDA_VISIBLE_DEVICES=0 python test_inpainting.py --model_path check_points/ref_guided_inpainting \
