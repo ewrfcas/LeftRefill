@@ -15,6 +15,16 @@ annotation: multiview
 return_attn: false
 image_text_pair: false
 
+# multi_image_list: [ '/places2_subset/image_sub1.txt',
+#                     '/places2_subset/image_sub2.txt',
+#                     '/places2_subset/image_sub3.txt',
+#                     '/places2_subset/image_sub4.txt']
+#
+# multi_text_list: [ '/places2_subset/text_sub1.txt'
+#                    '/places2_subset/text_sub2.txt',
+#                    '/places2_subset/text_sub3.txt',
+#                    '/places2_subset/text_sub4.txt']
+
 cross_view_inpainting: true
 
 n_sample_per_scene: 100
