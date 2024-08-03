@@ -14,16 +14,6 @@ val_mask_path: './data/test_mask_100'
 annotation: multiview
 return_attn: false
 image_text_pair: false
-#
-#multi_image_list: [ '/home/wmlce/BLIP2/places2_subset/image_sub1.txt',
-#                    '/home/wmlce/BLIP2/places2_subset/image_sub2.txt',
-#                    '/home/wmlce/BLIP2/places2_subset/image_sub3.txt',
-#                    '/home/wmlce/BLIP2/places2_subset/image_sub4.txt']
-#
-#multi_text_list: [ '/home/wmlce/BLIP2/places2_subset/text_sub1.txt'
-#                   '/home/wmlce/BLIP2/places2_subset/text_sub2.txt',
-#                   '/home/wmlce/BLIP2/places2_subset/text_sub3.txt',
-#                   '/home/wmlce/BLIP2/places2_subset/text_sub4.txt']
 
 cross_view_inpainting: true
 
