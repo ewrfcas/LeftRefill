@@ -27,7 +27,7 @@ As an exemplar, we leverage LeftRefill to address two different challenges: refe
 - [x] Releasing training, inference codes of Ref-inpainting and NVS (1-reference).
 - [x] Releasing pre-trained Ref-inpainting weights.
 - [x] Releasing codes of data processing.
-- [ ] Releasing codes of multi-view LeftRefill.
+- [x] Releasing codes of multi-view LeftRefill.
 
 ## Models
 
